@@ -1,0 +1,30 @@
+name = mycustomtheme
+description = Please provide a description for your theme.
+screenshot = screenshot.png
+engine = phptemplate
+core = 7.x
+
+;CSS
+stylesheets[all][]= css/main.css
+; ========================================
+; Regions
+; ========================================
+regions[menu] = Menu
+regions[header] = Header
+regions[top-header-logo] = Top Header Logo
+regions[top-header-right] = Top Header Right
+regions[main-navigation] = Main Navigation
+regions[footer] = Footer
+regions[footer-description] = Footer Description
+regions[right] = Right sidebar
+regions[meter-offer] = Meter Offer
+regions[slideshow] = Slideshow
+regions[content] = Content
+regions[related_articles] = Related Articles
+regions[support_contact] = Support Contact Us
+regions[support_search] = Support Search
+regions[supportcontent] = Support Content
+regions[mot_alert] = Notification Bar
+regions[mob_alert] = Mobile Notification Bar
+
+

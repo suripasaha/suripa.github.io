@@ -1,0 +1,164 @@
+<?php
+function custom_drupal_permission()
+{
+	return array(
+	'custom page access'=> array('title'=> 'custom permission')
+	);
+}
+function custom_drupal_menu()
+{
+	$items=array();
+	
+	$items['page1']=array(
+	'title'=>'new page',
+	'description'=>'sports',
+	'page callback' => 'customfunction',
+	'access arguments'=>array('custom page access'),
+	'type'=>MENU_NORMAL_ITEM,
+	);
+	$items['form1']=array(
+	'title'=>'form',
+	'description'=>'formelement',
+	'page callback'=> 'drupal_get_form',
+	'page arguments'=> ('common_form'),
+	'access arguments'=>array('custom page access'),
+	'type'=>MENU_NORMAL_ITEM,
+	);
+	
+	return $items;
+	
+}
+function customfunction(){
+	echo 'new page created';
+}
+function common_form($form_state) {
+//google cse advance search proxy setting  
+  $form['Iframe'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'personal information',
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE
+  );
+  $form['Iframe']['first_name'] = array(
+    '#type' => 'textfield',
+    '#title' => 'first name',
+    '#size' => 70,
+    '#default_value' => variable_get('first name',''),
+  );
+  $form['Iframe']['address'] = array(
+    '#type' => 'textfield',
+    '#title' => 'address',
+    '#size' => 70,
+    '#default_value' => variable_get('address',''),
+  );
+ 
+  $form['province'] = array(
+     '#type' => 'select',
+     '#title' => 'province',
+     '#options' => array(
+       'zero' => t('Zero'),
+       'one' => t('One'),
+       'seven' => t('Seven'),
+       'six' => t('Six'),
+       'two' => t('Two'),
+     ),
+     '#default_value' => 'nine',
+     //'#order_by' => 'text', // May contain values as "text" or "value".
+     //'#sort_order' => 'asc', // May contain values as "asc" or "desc".
+    );
+	 /* $format = 'Y-m-d H:i';
+   $date = '2008-12-31 00:00:00';
+  $form['date'] = array(
+     '#type' => 'date_select', // types 'date_text' and 'date_timezone' are also supported. See .inc file.
+     '#title' => 'select a date',
+     '#default_value' => $date, 
+     '#date_format' => $format,
+     '#date_label_position' => 'within', // See other available attributes and what they do in date_api_elements.inc
+     '#date_timezone' => 'America/Chicago', // Optional, if your date has a timezone other than the site timezone.
+     
+  );
+
+  // [...snip...] more fields, including the 'submit' button.
+
+	
+	return $form;
+} */
+/* $dateformat = 'Y-m-d H:i';
+    $timestamp = time(); // <- as example, usually this is a db value
+    $label = t('Custom date');
+  
+    $dbv = $timestamp;
+    $value = NULL;
+    
+    // construct date, if db value is empty, default to now
+    if (empty($dbv)) {
+      $d = new DateTime('@'.$dbv);
+      $value = $d->format($dateformat);
+    } else {
+      $d = new DateTime();
+      $value = $d->format($dateformat);
+    }
+    
+    $form['thedatefield'] = array(
+      '#type' => 'date_popup',
+      //'#date_timezone' => date_default_timezone(),
+      '#date_format' => $dateformat,
+      '#date_year_range' => '-3:+3',
+      '#title' => $label,
+      '#default_value' => $value,
+      '#required' => TRUE,
+    );
+	return $form;
+	}
+ */
+
+//function drupal_get_form(){
+	//echo 'new form created';
+//}
+$form['province1'] = array(
+     '#type' => 'radios',
+     '#title' => 'province1',
+	
+     '#options' => array(
+       'zero' => t('Zero'),
+       'one' => t('One'),
+       'seven' => t('Seven'),
+       'six' => t('Six'),
+       'two' => t('Two'),
+     ),
+     '#default_value' => 'nine',
+     //'#order_by' => 'text', // May contain values as "text" or "value".
+     //'#sort_order' => 'asc', // May contain values as "asc" or "desc".
+    );
+	$form['province2'] = array(
+     '#type' => 'checkboxes',
+     '#title' => 'province2',
+	 '#prefix'=>'I would like to receive diabetes-related communications regarding products, promotions, educational programs, and services (including requests for information on how to improve our service and products) from LifeScan Canada Ltd. (which includes the Animas division.) Communications will be sent via the following methods to the contact information provided above. I understand I can subsequently withdraw my consent if I choose.',
+     '#options' => array(
+       'zero' => t('Zero'),
+       'one' => t('One'),
+       'seven' => t('Seven'),
+       'six' => t('Six'),
+       'two' => t('Two'),
+     ),
+     '#default_value' => 'nine',
+     //'#order_by' => 'text', // May contain values as "text" or "value".
+     //'#sort_order' => 'asc', // May contain values as "asc" or "desc".
+    );
+	$form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Update'),
+	'#attributes' => array('title' => 'Update')
+  );
+	return $form;
+	}
+function common_form_validate($form,&$form_state){
+	/* echo '<pre>';
+	print_r($form_state['values']['first_name']);
+	exit; */
+	if($form_state['values']['first_name'] == '')
+	{
+		drupal_set_message('First Name is required');	
+	}
+	
+}
